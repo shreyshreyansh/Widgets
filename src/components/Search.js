@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function Search() {
 
     const [term, setTerm] = useState('');
 
-    const onFormSubmit = (event) => {
-        event.preventDefault();
-        console.log(term);
-    }
+    useEffect(() => {
+        console.log("...");
+    }, [])
 
     return (
         <div>
