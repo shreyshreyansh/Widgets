@@ -19,9 +19,18 @@ function Search() {
                 });
                 setResults(response.data.query.search);
             }
-        if(term)
-        helperFunction();
-        
+        if(term && !results.length){
+            helperFunction();
+        }else{
+            const timeoutId = setTimeout(() => {
+                if(term)
+                helperFunction(); 
+            }, 500);
+    
+            return () => {
+                clearTimeout(timeoutId);
+            }
+        }    
     }, [term]);
 
     const renderedItems = results.map((result, index) => {
