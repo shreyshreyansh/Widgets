@@ -3,6 +3,7 @@ import Search from './components/Search';
 import Accordion from './components/Accordion'
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
+import Router from './components/Router';
 
 const items = [
     {
@@ -42,13 +43,29 @@ export default () => {
     const [selected, setSeleted] = useState(options[0]);
     return ( 
         <div>
-        {showComponent("/", <Accordion items = {items} />)}
+        <Router pathname="/">
+            <Accordion items={items} />
+        </Router>
+        <Router pathname="/list">
+            <Search />
+        </Router>
+        <Router pathname="/dropdown">
+            <Dropdown 
+            selected={selected}
+            onSelectChange={setSeleted}
+            options={options}
+            />
+        </Router>
+        <Router pathname="/translate">
+            <Translate />
+        </Router>
+        {/* {showComponent("/", <Accordion items = {items} />)}
         {showComponent("/list", <Search />)}
         {showComponent("/dropdown", <Dropdown 
             selected={selected}
             onSelectChange={setSeleted}
             options={options}
             />)}
-        {showComponent("/translate", <Translate />)}
+        {showComponent("/translate", <Translate />)} */}
         </div> );
 }
