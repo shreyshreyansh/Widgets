@@ -32,60 +32,23 @@ const options = [
         label: 'The Color Blue',
         value: 'blue'
     }
-]
+];
 
-const showAccordion = () => {
-    if(window.location.pathname === '/')
-        return <Accordion items = {items} />
-    else
-        return null;
-}
-
-const showList = () => {
-    if(window.location.pathname === '/list')
-        return <Search />
-    else
-        return null;
-}
-
-const showDropDown = () => {
-    
-    if(window.location.pathname === '/dropdown')
-        return <Dropdown 
-            // selected={selected}
-            // onSelectChange={setSeleted}
-            // options={options}
-            />
-    else
-        return null;
-}
-
-const showTranslate = () => {
-    if(window.location.pathname === '/translate')
-        return <Translate />
-    else
-        return null;
+const showComponent = (route, component) => {
+    return window.location.pathname === route ? component : null;
 }
 
 export default () => {
     const [selected, setSeleted] = useState(options[0]);
-    // return <Accordion items = {items} />;
-    // return <Search />
-
-    // const [selected, setSeleted] = useState(options[0]);
-    // return <Dropdown 
-    //         selected={selected}
-    //         onSelectChange={setSeleted}
-    //         options={options}
-    //         />
-
-    // return <Translate />;
-
     return ( 
         <div>
-        {showAccordion()}
-        {showList()}
-        {showDropDown()}
-        {showTranslate()}
+        {showComponent("/", <Accordion items = {items} />)}
+        {showComponent("/list", <Search />)}
+        {showComponent("/dropdown", <Dropdown 
+            selected={selected}
+            onSelectChange={setSeleted}
+            options={options}
+            />)}
+        {showComponent("/translate", <Translate />)}
         </div> );
 }
